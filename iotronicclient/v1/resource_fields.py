@@ -70,7 +70,9 @@ class Resource(object):
         'zone': 'Zone',
         'dns': 'DNS',
         'connectivity': 'Connectivity',
-        'lr_version': 'LR Version'
+        'lr_version': 'LR Version',
+        'agent': 'WampAgent',
+        'wstun_ip': 'Wstun'
 
     }
 
@@ -134,6 +136,9 @@ BOARD_DETAILED_RESOURCE = Resource(
         'location',
         'project',
         'owner',
+        'agent',
+        'wstun_ip',
+
 
 
     ],
