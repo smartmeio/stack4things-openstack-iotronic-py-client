@@ -15,6 +15,7 @@ from iotronicclient.common import cliutils
 from iotronicclient.common.i18n import _
 from iotronicclient.common import utils
 from iotronicclient.v1 import resource_fields as res_fields
+import json
 
 
 def _print_board_show(board, fields=None, json=False):
@@ -225,3 +226,32 @@ def do_board_update(cc, args):
 
     board = cc.board.update(args.board, patch)
     _print_board_show(board, json=args.json)
+
+
+@cliutils.arg('board',
+              metavar='<board>',
+              help="Name or UUID of the board.")
+@cliutils.arg('action',
+              metavar='<action>',
+              help="action of the plugin.")
+@cliutils.arg(
+    '--params',
+    metavar='<parameter=value>',
+    nargs='+',
+    action='append',
+    default=[],
+    help="Parameters of the action")
+@cliutils.arg(
+    '--params-file',
+    metavar='<params_file>',
+    help="Json file of parameters")
+def do_board_action(cc, args):
+    """Execute an action on the board."""
+    params = {}
+    if args.params_file:
+        with open(args.params_file, 'r') as fil:
+            params = json.load(fil)
+    elif args.params:
+        params = {k: v for k, v in (x.split('=') for x in args.params[0])}
+    result = cc.board.board_action(args.board, args.action, params)
+    print(_('%s') % result)

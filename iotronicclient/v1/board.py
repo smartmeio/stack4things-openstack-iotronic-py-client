@@ -103,3 +103,10 @@ class BoardManager(base.CreateManager):
     def update(self, board_id, patch, http_method='PATCH'):
         return self._update(resource_id=board_id, patch=patch,
                             method=http_method)
+
+    def board_action(self, board_ident, action, params={}):
+        path = "%(board)s/action" % {'board': board_ident}
+        body = {"action": action,
+                "parameters": params
+                }
+        return self._update(path, body, method='POST')
