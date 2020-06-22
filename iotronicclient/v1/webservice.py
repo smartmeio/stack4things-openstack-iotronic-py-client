@@ -187,6 +187,10 @@ class WebServiceOnBoardManager(base.CreateManager):
 
         return self.api.raw_request('DELETE', self._path(path))
 
+    def renew_webservice(self, board_ident):
+        path = "%s/webservices/renew" % board_ident
+
+        return self.api.raw_request('GET', self._path(path))
 
 class EnabledWebservice(base.Resource):
     def __repr__(self):

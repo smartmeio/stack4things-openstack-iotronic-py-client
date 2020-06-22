@@ -311,6 +311,13 @@ def do_enable_webservices(cc, args):
 def do_disable_webservices(cc, args):
     cc.webserviceonboard.disable_webservice(args.board)
 
+@cliutils.arg(
+    'board',
+    metavar='<board_uuid>',
+    help="UUID of the board ")
+def do_renew_webservice(cc, args):
+    cc.webserviceonboard.renew_webservice(args.board)
+
 
 @cliutils.arg(
     '--limit',
