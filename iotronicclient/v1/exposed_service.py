@@ -104,3 +104,10 @@ class ExposedServiceManager(base.Manager):
         path = "%(board)s/services/restore" % {
             'board': board_ident}
         return self._list(self._path(path), "exposed")
+
+
+    def status_services(self, board_ident):
+
+        path = "%(board)s/services/status" % {
+            'board': board_ident}
+        return self._list(self._path(path), "exposed")

@@ -130,3 +130,13 @@ def do_restore_services(cc, args):
                             json_flag=args.json)
     else:
         print(_('%s') % 'no services could be found')
+
+
+@cliutils.arg('board',
+              metavar='<board>',
+              help="Name or UUID of the board.")
+def do_status_services(cc, args):
+    """Get status of sevices of the board."""
+    
+    result = cc.exposed_service.status_services(args.board)
+    print(_('%s') % result)
